@@ -1,5 +1,7 @@
-import { BrowserRouter, Route } from "react-router-dom";
-import SpotRequest from "./components/Auth";
+import React, { Component } from "react";
+
+
+import CurrentUser from './components/UserProfile';
 import FilterableSongTable from "./components/Table";
 import SideBar from "./components/Navbar";
 import "./index.css";
@@ -30,11 +32,15 @@ const tableSample = [
 
 
 function App() {
+
+
+
   return (
     <main className="relative grid grid-cols-1 gap-4 p-4 md:h-lvh md:grid-cols-12">
       {/* <SideBar />
       <FilterableSongTable songs={tableSample} /> */}
-      <SpotRequest />
+      {/* <Auth /> */}
+      <CurrentUser />
     </main>
   );
 }

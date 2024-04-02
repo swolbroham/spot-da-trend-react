@@ -1,38 +1,30 @@
-import { useEffect, useState } from 'react';
-import { redirect } from 'react-router-dom';
-import axios from 'axios';
+import { useCookies } from 'react-cookie';
+
+import { CurrentUser } from './UserProfile';
 
 
 
-function SpotRequest() {
-    const [ authUrl, setAuthUrl ] = useState("")
-    const [ auth, setAuth ] = useState([])
-    const [user, setUser] = useState(false)
-    
+
+    // const handleUserAuth = () => {
+    //     cookies.authorized ? <h1>Welcome</h1> :
+    //         <a href="http://localhost:5000">
+    //             <button className="rounded-3xl bg-slate-500 p-5 text-black">
+    //                 Log in to Spotify
+    //             </button>
+    //         </a>
+    // }
 
 
-    const getUser = async () => {
-        return axios.get('http://localhost:5000')
-            .then((response) => setAuthUrl(response.data["oAuthHref"]))
-            .catch((error) => console.log(error))
-            .finally(() => console.log('Client info imported'))
-    }
+export default function LoginAccess() {
+    const [cookies, setCookies] = useCookies(['user'])
 
-    useEffect(() => {
-        Promise.all([getUser()]);
-    }, [])
-    
     return (
-        <>
         <div>
-                <h1>Sign In</h1>
-                <a href={authUrl}>
-                <button className="rounded-3xl bg-slate-500 p-5 text-black">Log in to Spotify</button>
-                </a>
-            
+            {cookies.authorized ? <h1 className='size-10'>Welcome to the Party</h1> :
+                <button className="rounded-3xl bg-slate-500 p-5 text-black">
+                    Log in to Spotify
+                </button>
+            }
         </div>
-        </>
-
-);
-}
-export default SpotRequest;
+    )
+};

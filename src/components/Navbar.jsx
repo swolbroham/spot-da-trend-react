@@ -46,7 +46,7 @@ const pages = [
 function NavBar() {
   const [currentPage, setCurrentPage] = useState("Home");
   const [toggleNavBar, setToggleNavBar] = useState(false);
-
+  
   const toggleNav = () => {
     setToggleNavBar(!toggleNavBar);
   };
@@ -56,6 +56,7 @@ function NavBar() {
   }
 
   return (
+    
     <>
       <div className="absolute md:relative md:col-span-3 md:flex md:flex-col">
         <div className="fixed h-lvh w-full md:relative">

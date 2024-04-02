@@ -1,10 +1,11 @@
 import { useState } from "react";
 
+
 function SearchBar({ filterText, onFilterTextChange, handleSearchSubmit }) {
   return (
     <form
       onSubmit={handleSearchSubmit}
-      className="w-full rounded-3xl bg-white px-3 py-0.5"
+      className="w-fit rounded-3xl bg-white px-3 py-0.5"
     >
       <input
         className="w-full text-black"
@@ -17,12 +18,19 @@ function SearchBar({ filterText, onFilterTextChange, handleSearchSubmit }) {
   );
 }
 
+function SongTime(trackTime) {
+  var minutes = Math.floor(trackTime / 60000);
+  var seconds = ((trackTime % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+}
+
 function SongRow({ song }) {
   return (
     <tr className="align-left">
       <td>{song.songName}</td>
       <td>{song.artist}</td>
       <td>{song.album}</td>
+      <td>{SongTime(song.trackTime)}</td>
     </tr>
   );
 }
@@ -37,10 +45,25 @@ function SongTable({ songs, filterText }) {
         .toLowerCase()
         .indexOf(filterText.toString().toLowerCase()) === -1
     ) {
+    if (
+      song.artist
+        .toString()
+        .toLowerCase()
+        .indexOf(filterText.toString().toLowerCase()) === -1
+    ) {
+    if (
+      song.album
+        .toString()
+        .toLowerCase()
+        .indexOf(filterText.toString().toLowerCase()) === -1
+    ) {
       return;
+    }
+    }
     }
 
     rows.push(<SongRow song={song} />);
+
   });
 
   return (
@@ -50,6 +73,7 @@ function SongTable({ songs, filterText }) {
           <th>Song Name</th>
           <th>Artist</th>
           <th>Album</th>
+          <th>Track Time</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
@@ -61,7 +85,6 @@ export default function FilterableSongTable({ songs }) {
   const handleSearchSubmit = (event) => {
     event.preventDefault();
   };
-
   return (
     <div className="col-span-9 mt-9 h-full md:mt-0">
       <div className="flex h-full flex-col rounded-3xl bg-[#121212] text-2xl">
