@@ -1,3 +1,4 @@
+import CurrentUser from "./UserProfile"
 import { useState } from "react";
 import {
   PiListBold,
@@ -55,6 +56,9 @@ function NavBar() {
     setCurrentPage(page);
   }
 
+  
+
+
   return (
     
     <>
@@ -64,17 +68,17 @@ function NavBar() {
             <button className="hover:cursor-pointer" onClick={toggleNav}>
               {toggleNavBar ? (
                 <PiXBold className="size-8" color="white" />
-              ) : (
+                ) : (
                 <PiListBold className="size-8" color="white" />
-              )}
+                )}
             </button>
           </div>
-          <div className="h-full w-1/2 md:static md:w-full">
+          <div className="h-full w-1/2 py-4 md:static md:w-full">
             <div
               className={`${
                 toggleNavBar ? "visible" : "hidden md:block"
               } md:rounded-3xl md:relative flex flex-col bg-[#000] md:bg-[#121212] px-5 py-6 text-2xl font-semibold text-[#B3B3B3] h-full`}
-            >
+              >
               <ul className="flex flex-col gap-2">
                 {pages.map((page, index) => (
                   <li>
@@ -85,7 +89,7 @@ function NavBar() {
                       key={index}
                       onClick={() => handleCurrentPage(page.name)}
                       href={page.href}
-                    >
+                      >
                       <span>
                         {currentPage === page.name
                           ? page.iconSolid
@@ -97,6 +101,9 @@ function NavBar() {
                 ))}
               </ul>
             </div>
+              <div className="absolute bottom-8 flex w-full p-2 px-5">
+                <CurrentUser/>
+              </div>
           </div>
         </div>
       </div>

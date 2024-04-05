@@ -86,7 +86,7 @@ export default function FilterableSongTable({ songs }) {
     event.preventDefault();
   };
   return (
-    <div className="col-span-9 mt-9 h-full md:mt-0">
+    <div className="col-span-9 mt-9 h-full py-4 md:mt-0">
       <div className="flex h-full flex-col rounded-3xl bg-[#121212] text-2xl">
         <div className="px-4 py-5">
           <SearchBar
